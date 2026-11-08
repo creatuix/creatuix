@@ -1,111 +1,482 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Design to Email Mailer Conversion</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f1">
+  <meta name="description" content="CREATUIX is an independent creative studio bringing ideas to life through strategy, UX/UI, web design, branding, and campaigns.">
+  <title>CREATUIX — Where ideas come to life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <style>
+    :root {
+      --paper: #f6f7f1;
+      --ink: #173433;
+      --muted: #65736d;
+      --lime: #d3f36b;
+      --line: rgba(23, 52, 51, .15);
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #f5f5f5;
-      color: #333;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
+    h1, h2, h3, h4, .navbar-brand { font-family: "Manrope", sans-serif; }
+    a { color: inherit; }
+    .container { max-width: 1160px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--muted);
+      font-size: .73rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: currentColor; }
+
+    .navbar {
+      min-height: 82px;
+      background: rgba(246, 247, 241, .94);
+      border-bottom: 1px solid rgba(23, 52, 51, .08);
+      backdrop-filter: blur(14px);
     }
-    section {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #2c3e50;
-    }
-    form {
+    .navbar-brand {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: .12em;
     }
-    label {
-      margin-top: 15px;
-      font-weight: bold;
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      font-size: 1.05rem;
+      letter-spacing: 0;
     }
-    input, textarea {
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
+    .nav-link {
+      margin: 0 .45rem;
+      color: var(--ink);
+      font-size: .86rem;
+      font-weight: 600;
     }
-    button {
-      margin-top: 20px;
-      padding: 12px;
-      background: #27ae60;
+    .nav-link:hover { color: #748e36; }
+    .nav-cta, .button-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      border: 1px solid var(--ink);
+      border-radius: 50px;
+      background: var(--ink);
       color: white;
-      border: none;
+      font-size: .84rem;
+      font-weight: 600;
+      padding: .8rem 1.15rem;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .nav-cta:hover, .button-dark:hover { background: #294d48; color: white; transform: translateY(-2px); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 92px 0 84px;
+    }
+    .hero::after {
+      position: absolute;
+      z-index: -1;
+      top: -210px;
+      right: -210px;
+      width: 620px;
+      height: 620px;
+      border: 1px solid rgba(23, 52, 51, .08);
+      border-radius: 50%;
+      content: "";
+      box-shadow: 0 0 0 70px rgba(23, 52, 51, .018), 0 0 0 140px rgba(23, 52, 51, .014);
+    }
+    .hero h1 {
+      max-width: 700px;
+      margin: 20px 0 22px;
+      font-size: clamp(3.35rem, 7vw, 6.2rem);
+      font-weight: 600;
+      letter-spacing: -.075em;
+      line-height: .98;
+    }
+    .hero h1 em { color: #7a973a; font-family: var(--serif); font-weight: 400; }
+    .hero-copy { max-width: 470px; color: var(--muted); font-size: 1.04rem; line-height: 1.8; }
+    .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 32px; }
+    .text-link { font-size: .88rem; font-weight: 700; text-decoration: none; }
+    .text-link i { margin-left: .35rem; transition: margin .2s; }
+    .text-link:hover i { margin-left: .65rem; }
+    .hero-art {
+      position: relative;
+      min-height: 470px;
+      margin: 18px 0 0 16px;
+    }
+    .hero-photo {
+      position: absolute;
+      top: 16px;
+      right: 12px;
+      width: 76%;
+      height: 408px;
+      border-radius: 48% 48% 8px 8px;
+      background: #e4e9dc url("https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1100&q=85") center 48% / cover;
+    }
+    .hero-photo::after {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(180deg, transparent 48%, rgba(12, 38, 34, .18));
+      content: "";
+    }
+    .hero-sticker {
+      position: absolute;
+      top: 45px;
+      left: 0;
+      display: grid;
+      width: 104px;
+      height: 104px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      color: var(--ink);
+      font-size: 1.9rem;
+      transform: rotate(-12deg);
+    }
+    .hero-note {
+      position: absolute;
+      right: 0;
+      bottom: 4px;
+      max-width: 220px;
+      padding: 18px 20px;
+      border: 1px solid rgba(23, 52, 51, .1);
       border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
+      background: white;
+      box-shadow: 0 14px 40px rgba(23, 52, 51, .08);
+      font-size: .84rem;
+      line-height: 1.5;
     }
-    button:hover {
-      background: #219150;
+    .hero-note strong { display: block; margin-bottom: 4px; font-family: "Manrope", sans-serif; font-size: .95rem; }
+    .hero-note span { color: var(--muted); }
+    .hero-index { position: absolute; bottom: 35px; left: 5px; color: var(--muted); font-size: .7rem; letter-spacing: .1em; writing-mode: vertical-rl; }
+
+    .ticker {
+      overflow: hidden;
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
+    .ticker-row { display: flex; justify-content: space-between; gap: 24px; color: #728078; font-size: .74rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .ticker-row span { white-space: nowrap; }
+    .ticker-row i { margin-right: 10px; color: #8ca34e; font-size: .9rem; }
+
+    .section-pad { padding: 112px 0; }
+    .section-heading { max-width: 640px; margin: 16px 0 20px; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 600; letter-spacing: -.065em; line-height: 1.08; }
+    .section-copy { max-width: 530px; color: var(--muted); line-height: 1.8; }
+    .work-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 42px; }
+    .work-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 26px; align-items: start; }
+    .project-card { display: block; text-decoration: none; }
+    .project-card:nth-child(2) { margin-top: 92px; }
+    .project-visual { position: relative; overflow: hidden; min-height: 360px; border-radius: 5px; background: #e7e9dd; }
+    .project-visual img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; transition: transform .5s ease; }
+    .project-card:hover .project-visual img { transform: scale(1.035); }
+    .project-visual .project-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--lime);
+      font-size: 1.15rem;
+    }
+    .project-card:nth-child(2) .project-visual { background: #f1e4d1; }
+    .project-caption { display: flex; align-items: start; justify-content: space-between; gap: 15px; padding: 18px 0 0; }
+    .project-caption h3 { margin: 0 0 6px; font-size: 1.18rem; font-weight: 700; letter-spacing: -.03em; }
+    .project-caption p { margin: 0; color: var(--muted); font-size: .84rem; }
+    .project-type { color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; }
+
+    .services { background: #e9eee5; }
+    .services-intro { margin-bottom: 45px; }
+    .service-list { border-top: 1px solid var(--line); }
+    .service-row {
+      display: grid;
+      grid-template-columns: 55px 1fr 1.1fr 32px;
+      align-items: center;
+      gap: 20px;
+      padding: 25px 4px;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      transition: padding .2s ease;
+    }
+    .service-row:hover { padding-right: 12px; padding-left: 12px; }
+    .service-number { color: #87958c; font-size: .76rem; }
+    .service-row h3 { margin: 0; font-size: clamp(1.25rem, 2.2vw, 1.8rem); font-weight: 600; letter-spacing: -.045em; }
+    .service-row p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.6; }
+    .service-row > i { font-size: 1.1rem; transition: transform .2s; }
+    .service-row:hover > i { transform: translate(3px, -3px); }
+
+    .approach { padding: 112px 0; }
+    .approach-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 72px;
+      border-radius: 5px;
+      background: var(--ink);
+      color: white;
+    }
+    .approach-panel::after {
+      position: absolute;
+      top: -140px;
+      right: -55px;
+      width: 390px;
+      height: 390px;
+      border: 1px solid rgba(211, 243, 107, .25);
+      border-radius: 50%;
+      content: "";
+      box-shadow: 0 0 0 42px rgba(211, 243, 107, .045), 0 0 0 84px rgba(211, 243, 107, .035);
+    }
+    .approach-panel .eyebrow { color: #c3d0c4; }
+    .approach-panel .section-heading { position: relative; z-index: 1; max-width: 680px; }
+    .approach-panel .section-heading em { color: var(--lime); font-family: var(--serif); font-weight: 400; }
+    .approach-panel .section-copy { position: relative; z-index: 1; color: #c2cec5; }
+    .approach-steps { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 52px; }
+    .approach-step { padding-top: 18px; border-top: 1px solid rgba(255,255,255,.25); }
+    .approach-step span { color: var(--lime); font-size: .72rem; letter-spacing: .1em; }
+    .approach-step h3 { margin: 15px 0 8px; font-size: 1.03rem; font-weight: 600; }
+    .approach-step p { max-width: 235px; margin: 0; color: #c2cec5; font-size: .82rem; line-height: 1.65; }
+
+    .contact { padding: 92px 0 100px; border-top: 1px solid var(--line); }
+    .contact-inner { display: flex; align-items: end; justify-content: space-between; gap: 35px; }
+    .contact h2 { max-width: 660px; margin: 16px 0; font-size: clamp(2.7rem, 6.5vw, 5.8rem); font-weight: 600; letter-spacing: -.075em; line-height: 1; }
+    .contact h2 em { color: #7a973a; font-family: var(--serif); font-weight: 400; }
+    .contact-meta { margin-top: 28px; color: var(--muted); font-size: .85rem; }
+    .contact-meta a { color: var(--ink); font-weight: 700; text-decoration: none; }
+    .contact-button { flex: 0 0 auto; padding: 1.05rem 1.4rem; }
+    footer { padding: 24px 0; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--muted); font-size: .76rem; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { text-decoration: none; }
+
+    @media (max-width: 991.98px) {
+      .hero { padding-top: 66px; }
+      .hero-art { min-height: 420px; margin-left: 0; }
+      .hero-photo { height: 370px; }
+      .navbar-collapse { padding: 12px 0 18px; }
+      .nav-link { margin: .35rem 0; }
+      .nav-cta { margin-top: 8px; }
+      .approach-panel { padding: 56px 44px; }
+    }
+    @media (max-width: 767.98px) {
+      .hero { padding: 58px 0 52px; }
+      .hero h1 { font-size: clamp(3.25rem, 15vw, 5rem); }
+      .hero-art { min-height: 375px; margin-top: 30px; }
+      .hero-photo { top: 0; right: 7%; width: 78%; height: 340px; }
+      .hero-sticker { top: 26px; width: 78px; height: 78px; font-size: 1.5rem; }
+      .hero-note { right: 0; bottom: 0; max-width: 190px; padding: 14px; }
+      .hero-index { bottom: 22px; }
+      .ticker-row { justify-content: flex-start; overflow: auto; scrollbar-width: none; }
+      .ticker-row::-webkit-scrollbar { display: none; }
+      .section-pad, .approach { padding: 76px 0; }
+      .work-head { align-items: start; flex-direction: column; margin-bottom: 28px; }
+      .work-grid { grid-template-columns: 1fr; gap: 30px; }
+      .project-card:nth-child(2) { margin-top: 0; }
+      .project-visual, .project-visual img { min-height: 290px; }
+      .service-row { grid-template-columns: 32px 1fr 25px; gap: 12px; padding: 21px 0; }
+      .service-row p { grid-column: 2; grid-row: 2; }
+      .service-row > i { grid-column: 3; grid-row: 1; }
+      .approach-panel { padding: 42px 25px; }
+      .approach-steps { grid-template-columns: 1fr; gap: 22px; margin-top: 38px; }
+      .approach-step p { max-width: none; }
+      .contact { padding: 72px 0; }
+      .contact-inner { align-items: start; flex-direction: column; }
+      .footer-row { align-items: start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Email-Ready Mailer Conversion</h1>
-    <p>Turn your static designs into responsive, code-ready email templates</p>
-  </header>
+  <nav class="navbar navbar-expand-lg sticky-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand" href="#top" aria-label="CREATUIX home">
+        <img src="https://lh3.googleusercontent.com/a/ACg8ocIrwnn2tMZrNTJvNhW3NXXEkeWuw6QWIHfTrBiRGb91zRui0iE=s360-c-no" alt="" width="38" height="38" class="rounded-circle">
+        CREATUIX
+      </a>
+      <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#siteNav" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="siteNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#work">Work</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#approach">Our approach</a></li>
+          <li class="nav-item ms-lg-3"><a class="nav-cta" href="#contact">Let's talk <i class="bi bi-arrow-up-right"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <section>
-    <h2>What We Offer</h2>
-    <p>We convert your Figma, XD, or Photoshop designs into fully tested, mobile-friendly, email-ready HTML. Perfect for newsletters, campaigns, and email marketing platforms like Mailchimp, Klaviyo, and more.</p>
-    <ul>
-      <li>✅ Pixel-perfect HTML from your design</li>
-      <li>✅ Responsive layout across all devices</li>
-      <li>✅ Compatible with major email clients</li>
-      <li>✅ Fast turnaround & affordable pricing</li>
-    </ul>
-  </section>
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <span class="eyebrow">Independent creative studio</span>
+            <h1>Where ideas<br>come <em>to life.</em></h1>
+            <p class="hero-copy">We turn ambitious ideas into thoughtful brands and digital experiences that make people feel something — and move businesses forward.</p>
+            <div class="hero-actions">
+              <a class="button-dark" href="#work">Explore our work <i class="bi bi-arrow-down-right"></i></a>
+              <a class="text-link" href="#services">What we do <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-art" aria-label="Creative studio workspace">
+              <div class="hero-photo"></div>
+              <div class="hero-sticker" aria-hidden="true"><i class="bi bi-asterisk"></i></div>
+              <div class="hero-index">STRATEGY · DESIGN · DIGITAL</div>
+              <div class="hero-note"><strong>Good ideas deserve</strong><span>to be seen, felt, and remembered.</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section>
-    <h2>Place an Order</h2>
-    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-      <label for="name">Name *</label>
-      <input type="text" name="name" required>
+    <div class="ticker" aria-label="Our capabilities">
+      <div class="container">
+        <div class="ticker-row">
+          <span><i class="bi bi-sparkle"></i>Brand strategy</span>
+          <span><i class="bi bi-sparkle"></i>UX / UI design</span>
+          <span><i class="bi bi-sparkle"></i>Digital experiences</span>
+          <span><i class="bi bi-sparkle"></i>Campaigns that connect</span>
+        </div>
+      </div>
+    </div>
 
-      <label for="email">Email *</label>
-      <input type="email" name="email" required>
+    <section class="section-pad" id="work">
+      <div class="container">
+        <div class="work-head">
+          <div>
+            <span class="eyebrow">A few things we've made</span>
+            <h2 class="section-heading">Thoughtful work.<br>Real-world <em>impact.</em></h2>
+          </div>
+          <a class="text-link" href="#contact">Have a project in mind? <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="work-grid">
+          <a href="#contact" class="project-card" aria-label="Discuss a project like Form & Field">
+            <div class="project-visual">
+              <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=85" alt="Beautifully arranged stationery and printed materials" loading="lazy">
+              <span class="project-badge"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+            <div class="project-caption">
+              <div><h3>Form &amp; Field</h3><p>A fresh identity for everyday rituals</p></div>
+              <span class="project-type">Branding · Packaging</span>
+            </div>
+          </a>
+          <a href="#contact" class="project-card" aria-label="Discuss a project like Sunday Supply">
+            <div class="project-visual">
+              <img src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?auto=format&fit=crop&w=1200&q=85" alt="Designer working on a visual concept at a desk" loading="lazy">
+              <span class="project-badge"><i class="bi bi-arrow-up-right"></i></span>
+            </div>
+            <div class="project-caption">
+              <div><h3>Sunday Supply</h3><p>Making conscious shopping feel effortless</p></div>
+              <span class="project-type">Strategy · Digital</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <label for="project">Project Description *</label>
-      <textarea name="project" rows="5" placeholder="Link to design files, project scope..." required></textarea>
+    <section class="section-pad services" id="services">
+      <div class="container">
+        <div class="services-intro">
+          <span class="eyebrow">What we can do together</span>
+          <h2 class="section-heading">One good idea.<br>Every detail <em>considered.</em></h2>
+          <p class="section-copy">From the first big question to the final pixel, we bring strategy and creative craft together to build brands people choose, trust, and come back to.</p>
+        </div>
+        <div class="service-list">
+          <a href="#contact" class="service-row">
+            <span class="service-number">01</span><h3>Strategy &amp; storytelling</h3>
+            <p>Positioning, audience insights, brand voice, and a plan with purpose.</p><i class="bi bi-arrow-up-right"></i>
+          </a>
+          <a href="#contact" class="service-row">
+            <span class="service-number">02</span><h3>Brand identity &amp; logo</h3>
+            <p>Distinctive identities, visual systems, and guidelines built to grow.</p><i class="bi bi-arrow-up-right"></i>
+          </a>
+          <a href="#contact" class="service-row">
+            <span class="service-number">03</span><h3>UX / UI &amp; websites</h3>
+            <p>Intuitive journeys and responsive websites that make every click count.</p><i class="bi bi-arrow-up-right"></i>
+          </a>
+          <a href="#contact" class="service-row">
+            <span class="service-number">04</span><h3>Campaigns &amp; content</h3>
+            <p>Email and social campaigns with a clear message and a human touch.</p><i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <label for="budget">Estimated Budget</label>
-      <input type="text" name="budget">
+    <section class="approach" id="approach">
+      <div class="container">
+        <div class="approach-panel">
+          <span class="eyebrow">A little structure, a lot of imagination</span>
+          <h2 class="section-heading">Good work happens<br>when we <em>make it together.</em></h2>
+          <p class="section-copy">No mystery process. Just thoughtful collaboration, clear decisions, and the right people around the table from day one.</p>
+          <div class="approach-steps">
+            <div class="approach-step"><span>01 / DISCOVER</span><h3>Start with the why</h3><p>We listen, ask better questions, and get to know the people you're here for.</p></div>
+            <div class="approach-step"><span>02 / CREATE</span><h3>Make the idea real</h3><p>Strategy meets creative exploration. We share early, shape together, and refine.</p></div>
+            <div class="approach-step"><span>03 / LAUNCH</span><h3>Put it out there</h3><p>We make sure every detail is ready, then help your new idea find its audience.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <button type="submit">Send Request</button>
-    </form>
-  </section>
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-inner">
+          <div>
+            <span class="eyebrow">Have a good one in mind?</span>
+            <h2>Let's make<br>something <em>matter.</em></h2>
+            <p class="section-copy">Tell us what you're dreaming up. We’d love to hear about it.</p>
+            <div class="contact-meta">Prefer email? <a href="mailto:hello@creatuix.com">hello@creatuix.com</a></div>
+          </div>
+          <a class="button-dark contact-button" href="mailto:hello@creatuix.com?subject=Let%27s%20create%20something">Start a conversation <i class="bi bi-arrow-up-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 DesignMailerPro — All rights reserved.
+    <div class="container">
+      <div class="footer-row">
+        <a class="navbar-brand" href="#top"><img src="https://lh3.googleusercontent.com/a/ACg8ocIrwnn2tMZrNTJvNhW3NXXEkeWuw6QWIHfTrBiRGb91zRui0iE=s360-c-no" alt="" width="30" height="30" class="rounded-circle"> CREATUIX</a>
+        <span>© <span id="year"></span> CREATUIX. Where ideas come to life.</span>
+        <div class="footer-links"><a href="#services">Services</a><a href="#contact">Contact</a><a href="#top">Back to top ↑</a></div>
+      </div>
+    </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
